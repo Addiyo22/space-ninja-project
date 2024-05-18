@@ -5,6 +5,8 @@ class Game {
       this.gameScreen = document.getElementById("game-screen")
       this.liveContainer = document.getElementById("livesP")
       this.gameEndScreen = document.getElementById("end-screen")
+      this.controlscreen = document.getElementById("controls")
+      this.audio = document.getElementById("audioNaruto")
       this.player = new Player(
         this.gameScreen,
         200,
@@ -17,11 +19,21 @@ class Game {
       this.width = 700
       this.obstacles = []
       this.collectables = []
+      /* this.bossArr = [] */
       this.score = 0
       this.lives = 4
       this.gameIsOver = false
       this.gameIntervalId
       this.gameLoopFrequency = Math.round(1000/60)
+    }
+
+    startAudio(){
+        this.audio.play();
+    }
+
+    stopAudio(){
+        this.audio.currentTime = 0;
+        this.audio.pause()
     }
   
     start() {
@@ -30,9 +42,10 @@ class Game {
       this.startScreen.style.display = "none";
       this.statContainer.style.display = "block"
       this.gameScreen.style.display = "block";
+      this.gameEndScreen.style.display = "none"
       this.liveContainer.style.display = "block"
-  
-      
+      this.controlscreen.style.display = "none" 
+      this.startAudio()
       this.gameIntervalId = setInterval(() => {
         this.gameLoop()
       }, this.gameLoopFrequency)
@@ -55,10 +68,13 @@ class Game {
         this.player.element.remove()
         this.obstacles.forEach(obstacle => obstacle.element.remove())
         this.collectables.forEach(collectable => collectable.element.remove())
+        /* this.bossArr.forEach(this.boss => boss.element.remove()) */
         this.gameIsOver = true
         this.gameScreen.style.display = "none"
         this.gameEndScreen.style.display = "block"
         this.liveContainer.style.display = "none"
+        this.controlscreen.style.display = "none"
+        this.stopAudio()
     }
     update() { 
           this.updateScore()
@@ -91,7 +107,7 @@ class Game {
                 
             // Creating random obstacle
                  
-            if (Math.random() > 0.98 && this.obstacles.length < 3) {
+            if (Math.random() > 0.99 && this.obstacles.length < 4) {
                 this.obstacles.push(new Obstacle(this.gameScreen)); 
             } 
 
@@ -101,19 +117,50 @@ class Game {
                 const collectable = this.collectables[i]
                 collectable.move()
                 
+                
                 if (this.player.didCollide(collectable)) {
                     this.score++;
                     collectable.element.remove();
                     this.collectables.splice(i, 1);
                     i--;
                 }
+                else if (collectable.top > this.height) {
+                    collectable.element.remove();
+                    this.collectables.splice(i, 1);
+                    i--;
+                  }
               }
 
               // Creating random collectable
 
-              if (Math.random() > 0.98 && this.collectables.length < 4) {
+              if (Math.random() > 0.99 && this.collectables.length < 4) {
                 this.collectables.push(new Collectable(this.gameScreen));  
             }
+
+            // boss section 
+
+            /* for (let i = 0; i < this.bossArr.length; i++) {
+                const boss = this.bossArr[i]
+                boss.move()
+                
+
+                if (this.lives === 0) {
+                    this.endGame();
+                }
+
+                else if (this.player.didCollide(boss)) {
+                    boss.element.remove();
+                    this.bossArr.splice(i, 1);
+                    this.lives--;
+                    i--;
+                }
+                else if (collectable.top > this.height) {
+                    obstacle.element.remove();
+                this.obstacles.splice(i, 1);
+                i--;
+                  }
+              } */
+
         }
 
 }
@@ -235,7 +282,37 @@ class Player {
           this.top += 3;
           this.updatePosition();
         }
-      } 
+      }
+      
+      /* class Boss {
+        constructor(gameScreen) {
+          this.gameScreen = gameScreen;
+          this.left = Math.floor(Math.random() * 300 + 70);
+          this.top = 0;
+          this.width = 100;
+          this.height = 150;
+          this.element = document.createElement("img");
+      
+          this.element.src = "../Images/file.png";
+          this.element.style.position = "absolute";
+          this.element.style.width = `${this.width}px`;
+          this.element.style.height = `${this.height}px`;
+          this.element.style.left = `${this.left}px`;
+          this.element.style.top = `${this.top}px`;
+      
+          this.gameScreen.appendChild(this.element);
+        }
+      
+        updatePosition() {
+          this.element.style.left = `${this.left}px`;
+          this.element.style.top = `${this.top}px`;
+        }
+      
+        move() {
+          this.top += 3;
+          this.updatePosition();
+        }
+      }  */
 
       class Collectable {
         constructor(gameScreen) {
