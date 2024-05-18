@@ -3,6 +3,12 @@ window.onload = function () {
     const restartButton = document.querySelector("#restart-button")
     let game
 
+   /*  function music(){
+        var tune = new Audio('../music/fightMusic.mp3');
+        tune.play();
+        alert('tune');
+        } */
+
     function handleKeys(event) {
         const key = event.key
         console.log('key',key)

@@ -1,7 +1,9 @@
 class Game {
     constructor() {
       this.startScreen = document.getElementById("start-screen")
+      this.statContainer = document.getElementById("stat-container")
       this.gameScreen = document.getElementById("game-screen")
+      this.liveContainer = document.getElementById("livesP")
       this.gameEndScreen = document.getElementById("end-screen")
       this.player = new Player(
         this.gameScreen,
@@ -12,7 +14,7 @@ class Game {
         "../Images/naruto.gif"
       );
       this.height = 600
-      this.width = 500
+      this.width = 700
       this.obstacles = []
       this.collectables = []
       this.score = 0
@@ -24,11 +26,11 @@ class Game {
   
     start() {
       this.gameScreen.style.height = `${this.height}px`;
-      this.gameScreen.style.width = `${this.width}px`;
-  
+      this.gameScreen.style.width = `${this.width}px`;  
       this.startScreen.style.display = "none";
-      
+      this.statContainer.style.display = "block"
       this.gameScreen.style.display = "block";
+      this.liveContainer.style.display = "block"
   
       
       this.gameIntervalId = setInterval(() => {
@@ -56,6 +58,7 @@ class Game {
         this.gameIsOver = true
         this.gameScreen.style.display = "none"
         this.gameEndScreen.style.display = "block"
+        this.liveContainer.style.display = "none"
     }
     update() { 
           this.updateScore()
@@ -68,7 +71,11 @@ class Game {
             
             // obstacle section 
 
-            if (this.player.didCollide(obstacle)) {
+            if (this.lives === 0) {
+                this.endGame();
+            }
+
+            else if (this.player.didCollide(obstacle)) {
                 obstacle.element.remove();
                 this.obstacles.splice(i, 1);
                 this.lives--;
@@ -80,14 +87,11 @@ class Game {
               i--;
             }
     
-            if (this.lives === 0) {
-                this.endGame();
-            }
           }
                 
             // Creating random obstacle
                  
-            if (Math.random() > 0.98 && this.obstacles.length < 1) {
+            if (Math.random() > 0.98 && this.obstacles.length < 3) {
                 this.obstacles.push(new Obstacle(this.gameScreen)); 
             } 
 
@@ -168,32 +172,34 @@ class Player {
         this.element.style.top = `${this.top}px`;
       }
 
-      didCollide(obstacle) { // check if there's a collision between a player and an obstacle
-        const playerRect = this.element.getBoundingClientRect(); // --> {x, y, width, height, top, right, left, bottom}
-        const obstacleRect = obstacle.element.getBoundingClientRect(); // --> {x, y, width, height, top, right, left, bottom}
-    
+      didCollide(obstacle) { 
+
+        const playerRect = this.element.getBoundingClientRect(); 
+        const obstacleRect = obstacle.element.getBoundingClientRect(); 
+
         if (
           playerRect.left < obstacleRect.right &&
           playerRect.right > obstacleRect.left &&
           playerRect.top < obstacleRect.bottom &&
           playerRect.bottom > obstacleRect.top
-        ) { // if all these are true --> collision happened
+        ) { 
           return true;
         } else {
           return false;
         }
       }
 
-      didCollide(collectable) { // check if there's a collision between a player and an obstacle
-        const playerRect = this.element.getBoundingClientRect(); // --> {x, y, width, height, top, right, left, bottom}
-        const collectRect = collectable.element.getBoundingClientRect(); // --> {x, y, width, height, top, right, left, bottom}
+      didCollide(collectable) { 
+
+        const playerRect = this.element.getBoundingClientRect(); 
+        const collectRect = collectable.element.getBoundingClientRect();
     
         if (
           playerRect.left < collectRect.right &&
           playerRect.right > collectRect.left &&
           playerRect.top < collectRect.bottom &&
           playerRect.bottom > collectRect.top
-        ) { // if all these are true --> collision happened
+        ) { 
           return true;
         } else {
           return false;
@@ -221,15 +227,12 @@ class Player {
         }
       
         updatePosition() {
-          // Update the obstacle's position based on the properties left and top
           this.element.style.left = `${this.left}px`;
           this.element.style.top = `${this.top}px`;
         }
       
         move() {
-          // Move the obstacle down by 3px
           this.top += 3;
-          // Update the obstacle's position on the screen
           this.updatePosition();
         }
       } 
@@ -254,15 +257,13 @@ class Player {
         }
       
         updatePosition() {
-          // Update the obstacle's position based on the properties left and top
           this.element.style.left = `${this.left}px`;
           this.element.style.top = `${this.top}px`;
         }
       
         move() {
-          // Move the obstacle down by 3px
           this.top += 3;
-          // Update the obstacle's position on the screen
+
           this.updatePosition();
         }
       }
