@@ -323,7 +323,7 @@ class Player {
           this.height = 130;
           this.element = document.createElement("img");
       
-          this.element.src = "../images/ramen.png";
+          this.element.src = "images/ramen.png";
           this.element.style.position = "absolute";
           this.element.style.width = `${this.width}px`;
           this.element.style.height = `${this.height}px`;
