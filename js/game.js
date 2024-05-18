@@ -13,7 +13,7 @@ class Game {
         520,
         100,
         120,
-        "https://Addiyo22.github.io/Space-Ninja/images/naruto.gif"
+        "https://addiyo22.github.io/Space-Ninja/images/naruto.gif"
       );
       this.height = 600
       this.width = 700
