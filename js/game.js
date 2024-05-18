@@ -13,7 +13,7 @@ class Game {
         520,
         100,
         120,
-        "../Images/naruto.gif"
+        "../images/naruto.gif"
       );
       this.height = 600
       this.width = 700
@@ -263,7 +263,7 @@ class Player {
           this.height = 150;
           this.element = document.createElement("img");
       
-          this.element.src = "../Images/shuriken.gif";
+          this.element.src = "../images/shuriken.gif";
           this.element.style.position = "absolute";
           this.element.style.width = `${this.width}px`;
           this.element.style.height = `${this.height}px`;
@@ -323,7 +323,7 @@ class Player {
           this.height = 130;
           this.element = document.createElement("img");
       
-          this.element.src = "../Images/ramen.png";
+          this.element.src = "../images/ramen.png";
           this.element.style.position = "absolute";
           this.element.style.width = `${this.width}px`;
           this.element.style.height = `${this.height}px`;
