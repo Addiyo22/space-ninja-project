@@ -264,7 +264,7 @@ class Player {
           this.height = 150;
           this.element = document.createElement("img");
       
-          this.element.src = "../docs/assets/shuriken.gif";
+          this.element.src = "./docs/assets/shuriken.gif";
           this.element.style.position = "absolute";
           this.element.style.width = `${this.width}px`;
           this.element.style.height = `${this.height}px`;
@@ -324,7 +324,7 @@ class Player {
           this.height = 130;
           this.element = document.createElement("img");
       
-          this.element.src = "../docs/assets/ramen.png";
+          this.element.src = "./docs/assets/ramen.png";
           this.element.style.position = "absolute";
           this.element.style.width = `${this.width}px`;
           this.element.style.height = `${this.height}px`;
