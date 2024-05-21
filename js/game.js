@@ -14,7 +14,7 @@ class Game {
         520,
         100,
         120,
-        "./images/naruto.gif"
+        "./docs/assets/naruto.gif"
       );
       this.height = 600
       this.width = 700
