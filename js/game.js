@@ -14,7 +14,7 @@ class Game {
         520,
         100,
         120,
-        "https://github.com/Addiyo22/space-ninja-project/Images/naruto.gif"
+        "https://github.com/Addiyo22/space-ninja-project/main/tree/Images/naruto.gif"
       );
       this.height = 600
       this.width = 700
