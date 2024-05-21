@@ -1,8 +1,9 @@
 class Game {
     constructor() {
       this.startScreen = document.getElementById("start-screen")
-      this.statContainer = document.getElementById("stat-container")
       this.gameScreen = document.getElementById("game-screen")
+      this.statContainer = document.getElementById("stat-container")
+      this.gameContainer = document.getElementById("game-container")
       this.liveContainer = document.getElementById("livesP")
       this.gameEndScreen = document.getElementById("end-screen")
       this.controlscreen = document.getElementById("controls")
@@ -13,15 +14,14 @@ class Game {
         520,
         100,
         120,
-        "https://addiyo22.github.io/Space-Ninja/images/naruto.gif"
+        "../images/naruto.gif"
       );
       this.height = 600
       this.width = 700
       this.obstacles = []
       this.collectables = []
-      /* this.bossArr = [] */
       this.score = 0
-      this.lives = 4
+      this.lives = 1
       this.gameIsOver = false
       this.gameIntervalId
       this.gameLoopFrequency = Math.round(1000/60)
@@ -39,8 +39,8 @@ class Game {
     start() {
       this.gameScreen.style.height = `${this.height}px`;
       this.gameScreen.style.width = `${this.width}px`;  
+      this.gameContainer.style.display = "block";
       this.startScreen.style.display = "none";
-      this.statContainer.style.display = "block"
       this.gameScreen.style.display = "block";
       this.gameEndScreen.style.display = "none"
       this.liveContainer.style.display = "block"
@@ -62,14 +62,15 @@ class Game {
       }
       updateScore(){
         document.getElementById('score').textContent = this.score;
+        document.getElementById('scoreEnd').textContent = this.score;
       }
 
     endGame() {
         this.player.element.remove()
         this.obstacles.forEach(obstacle => obstacle.element.remove())
         this.collectables.forEach(collectable => collectable.element.remove())
-        /* this.bossArr.forEach(this.boss => boss.element.remove()) */
         this.gameIsOver = true
+        this.gameContainer.style.display = "none"
         this.gameScreen.style.display = "none"
         this.gameEndScreen.style.display = "block"
         this.liveContainer.style.display = "none"

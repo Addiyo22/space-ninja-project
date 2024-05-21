@@ -21,19 +21,21 @@
             
         </div>
         <h2>Use arrow keys to move ninja</h2>
+        <h2>Avoid the shuriken and collect the delicious ramen</h2>
     </section>
 
     <section id="game-container">
-        <div id="stat-container">
-            <h2>Stats:</h2>
-            <p id="scoreP">Score: <span id="score">0</span></p>
-            <p id="livesP">Lives: <span id="lives">4</span></p>
+        <div id="game-screen">
+            <div id="stat-container">
+                <p id="scoreP">Score: <span id="score">0</span></p>
+                <p id="livesP">Lives: <span id="lives">1</span></p>
+            </div>
         </div>
-        <div id="game-screen"></div>
     </section>
 
     <section id="end-screen">
-        <h1>Game Over!</h1>
+        <h1 class="endH1">You Died</h1>
+        <p>Score: <span id="scoreEnd">0</span></p>
         <div><img src="./Images/death_screen.webp" alt="1000 years of death!"></div>
         <button id="restart-button">Restart</button>
     </section>
