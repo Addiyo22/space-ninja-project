@@ -14,8 +14,8 @@ body {
   width: 10rem;
 }
 
-#controld div{
-  height: 20rem;
+#start-button{
+  width: 250px;
 }
 
 #controls p {
@@ -52,10 +52,10 @@ body {
 }
 
 #game-container{
+    display: flex;
+    justify-content: center;
     width: 100vw;
     padding: 20px 0px;
-    justify-content: center;
-    align-items: center;
 }
 
 #stat-container{
@@ -108,10 +108,12 @@ body {
 
   #restart-button{
     margin-top: 20px;
+    margin-right: 20px;
   }
 
   button {
     font-size: 30px;
+    width: 200px;
     background-color: #F77F00;
     color: #fff;
     padding: 20px 40px;

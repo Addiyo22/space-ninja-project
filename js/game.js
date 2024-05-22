@@ -19,9 +19,11 @@ class Game {
       this.height = 600
       this.width = 700
       this.obstacles = []
+      this.obstacles2 = []
       this.collectables = []
+      this.bossArr = []
       this.score = 0
-      this.lives = 1
+      this.lives = 4
       this.gameIsOver = false
       this.gameIntervalId
       this.gameLoopFrequency = Math.round(1000/60)
@@ -39,7 +41,7 @@ class Game {
     start() {
       this.gameScreen.style.height = `${this.height}px`;
       this.gameScreen.style.width = `${this.width}px`;  
-      this.gameContainer.style.display = "block";
+      this.gameContainer.style.display = "flex";
       this.startScreen.style.display = "none";
       this.gameScreen.style.display = "block";
       this.gameEndScreen.style.display = "none"
@@ -68,7 +70,9 @@ class Game {
     endGame() {
         this.player.element.remove()
         this.obstacles.forEach(obstacle => obstacle.element.remove())
+        this.obstacles2.forEach(obstacle => obstacle.element.remove())
         this.collectables.forEach(collectable => collectable.element.remove())
+        this.bossArr.forEach(boss => boss.element.remove())
         this.gameIsOver = true
         this.gameContainer.style.display = "none"
         this.gameScreen.style.display = "none"
@@ -81,12 +85,12 @@ class Game {
           this.updateScore()
           this.updateLives()
           this.player.move() // get most recent player position
+
+          // obstacle section 
     
            for (let i = 0; i < this.obstacles.length; i++) {
             const obstacle = this.obstacles[i]
             obstacle.move()
-            
-            // obstacle section 
 
             if (this.lives === 0) {
                 this.endGame();
@@ -108,7 +112,7 @@ class Game {
                 
             // Creating random obstacle
                  
-            if (Math.random() > 0.99 && this.obstacles.length < 4) {
+            if (Math.random() > 0.99 && this.obstacles.length < 1) {
                 this.obstacles.push(new Obstacle(this.gameScreen)); 
             } 
 
@@ -117,8 +121,7 @@ class Game {
             for (let i = 0; i < this.collectables.length; i++) {
                 const collectable = this.collectables[i]
                 collectable.move()
-                
-                
+
                 if (this.player.didCollide(collectable)) {
                     this.score++;
                     collectable.element.remove();
@@ -138,30 +141,59 @@ class Game {
                 this.collectables.push(new Collectable(this.gameScreen));  
             }
 
+            // obstacle 2 section
+
+            for (let i = 0; i < this.obstacles2.length; i++) {
+              const obstacle2 = this.obstacles2[i]
+              obstacle2.move()
+
+              if (this.lives === 0) {
+                  this.endGame();
+              }
+  
+              else if (this.player.didCollide(obstacle2)) {
+                  obstacle2.element.remove();
+                  this.obstacles2.splice(i, 1);
+                  this.lives--;
+                  i--;
+              }
+              else if (obstacle2.top > this.height) {
+                obstacle2.element.remove();
+                this.obstacles2.splice(i, 1);
+                i--;
+              }
+      
+            }
+            if (Math.random() > 0.95 && this.obstacles2.length < 2) {
+              this.obstacles2.push(new Obstacle2(this.gameScreen)); 
+          } 
+
             // boss section 
 
-            /* for (let i = 0; i < this.bossArr.length; i++) {
-                const boss = this.bossArr[i]
-                boss.move()
-                
-
-                if (this.lives === 0) {
-                    this.endGame();
-                }
-
-                else if (this.player.didCollide(boss)) {
-                    boss.element.remove();
-                    this.bossArr.splice(i, 1);
-                    this.lives--;
-                    i--;
-                }
-                else if (collectable.top > this.height) {
-                    obstacle.element.remove();
-                this.obstacles.splice(i, 1);
-                i--;
+                for (let i = 0; i < this.bossArr.length; i++) {
+                  const boss = this.bossArr[i]
+                  boss.move()
+                  
+  
+                  if (this.lives === 0) {
+                      this.endGame();
                   }
-              } */
-
+  
+                  else if (this.player.didCollide(boss)) {
+                      boss.element.remove();
+                      this.bossArr.splice(i, 1);
+                      this.lives--;
+                      i--;
+                  }
+                  else if (boss.top > this.height) {
+                      boss.element.remove();
+                      this.bossArr.splice(i, 1);
+                      i--;
+                    }
+                }
+            if (this.lives === 2) {
+              this.bossArr.push(new Boss(this.gameScreen)); 
+          } 
         }
 
 }
@@ -220,6 +252,23 @@ class Player {
         this.element.style.top = `${this.top}px`;
       }
 
+      didCollide(boss) { 
+
+        const playerRect = this.element.getBoundingClientRect(); 
+        const bossRect = boss.element.getBoundingClientRect(); 
+
+        if (
+          playerRect.left < bossRect.right &&
+          playerRect.right > bossRect.left &&
+          playerRect.top < bossRect.bottom &&
+          playerRect.bottom > bossRect.top
+        ) { 
+          return true;
+        } else {
+          return false;
+        }
+      }
+
       didCollide(obstacle) { 
 
         const playerRect = this.element.getBoundingClientRect(); 
@@ -230,6 +279,23 @@ class Player {
           playerRect.right > obstacleRect.left &&
           playerRect.top < obstacleRect.bottom &&
           playerRect.bottom > obstacleRect.top
+        ) { 
+          return true;
+        } else {
+          return false;
+        }
+      }
+
+      didCollide(obstacle2) { 
+
+        const playerRect = this.element.getBoundingClientRect(); 
+        const obstacle2Rect = obstacle2.element.getBoundingClientRect(); 
+
+        if (
+          playerRect.left < obstacle2Rect.right &&
+          playerRect.right > obstacle2Rect.left &&
+          playerRect.top < obstacle2Rect.bottom &&
+          playerRect.bottom > obstacle2Rect.top
         ) { 
           return true;
         } else {
@@ -263,15 +329,13 @@ class Player {
           this.width = 100;
           this.height = 150;
           this.element = document.createElement("img");
-      
           this.element.src = "./docs/assets/shuriken.gif";
-          this.element.style.position = "absolute";
-          this.element.style.width = `${this.width}px`;
-          this.element.style.height = `${this.height}px`;
-          this.element.style.left = `${this.left}px`;
-          this.element.style.top = `${this.top}px`;
-      
-          this.gameScreen.appendChild(this.element);
+          this.element.style.position = "absolute";         
+          this.element.style.width = `${this.width}px`;         
+          this.element.style.height = `${this.height}px`;          
+          this.element.style.left = `${this.left}px`;          
+          this.element.style.top = `${this.top}px`;          
+          this.gameScreen.appendChild(this.element);  
         }
       
         updatePosition() {
@@ -285,16 +349,16 @@ class Player {
         }
       }
       
-      /* class Boss {
+      class Obstacle2 {
         constructor(gameScreen) {
           this.gameScreen = gameScreen;
           this.left = Math.floor(Math.random() * 300 + 70);
           this.top = 0;
-          this.width = 100;
-          this.height = 150;
+          this.width = 30;
+          this.height = 100;
           this.element = document.createElement("img");
       
-          this.element.src = "../Images/file.png";
+          this.element.src = "./docs/assets/kunai.png";
           this.element.style.position = "absolute";
           this.element.style.width = `${this.width}px`;
           this.element.style.height = `${this.height}px`;
@@ -313,7 +377,7 @@ class Player {
           this.top += 3;
           this.updatePosition();
         }
-      }  */
+      } 
 
       class Collectable {
         constructor(gameScreen) {
@@ -341,7 +405,36 @@ class Player {
       
         move() {
           this.top += 3;
+          this.updatePosition();
+        }
+      }
 
+      class Boss {
+        constructor(gameScreen) {
+          this.gameScreen = gameScreen;
+          this.left = Math.floor(Math.random() * 300 + 70);
+          this.top = 0;
+          this.width = 80;
+          this.height = 130;
+          this.element = document.createElement("img");
+      
+          this.element.src = "../docs/assets/file.png";
+          this.element.style.position = "absolute";
+          this.element.style.width = `${this.width}px`;
+          this.element.style.height = `${this.height}px`;
+          this.element.style.left = `${this.left}px`;
+          this.element.style.top = `${this.top}px`;
+      
+          this.gameScreen.appendChild(this.element);
+        }
+      
+        updatePosition() {
+          this.element.style.left = `${this.left}px`;
+          this.element.style.top = `${this.top}px`;
+        }
+      
+        move() {
+          this.top += 3;
           this.updatePosition();
         }
       }
