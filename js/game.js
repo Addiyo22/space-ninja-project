@@ -182,16 +182,14 @@ class Game {
                   else if (this.player.didCollide(boss)) {
                       boss.element.remove();
                       this.bossArr.splice(i, 1);
-                      this.lives--;
+                      this.lives -= 2
                       i--;
                   }
                   else if (boss.top > this.height) {
                       boss.element.remove();
-                      this.bossArr.splice(i, 1);
-                      i--;
                     }
                 }
-            if (this.lives === 2) {
+            if (Math.random() > 0.95 && this.bossArr.length < 1 && this.score === 20) {
               this.bossArr.push(new Boss(this.gameScreen)); 
           } 
         }
@@ -414,11 +412,11 @@ class Player {
           this.gameScreen = gameScreen;
           this.left = Math.floor(Math.random() * 300 + 70);
           this.top = 0;
-          this.width = 80;
-          this.height = 130;
+          this.width = 200;
+          this.height = 300;
           this.element = document.createElement("img");
       
-          this.element.src = "../docs/assets/file.png";
+          this.element.src = "./docs/assets/file.png";
           this.element.style.position = "absolute";
           this.element.style.width = `${this.width}px`;
           this.element.style.height = `${this.height}px`;
