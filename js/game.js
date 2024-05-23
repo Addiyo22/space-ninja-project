@@ -189,7 +189,7 @@ class Game {
                       boss.element.remove();
                     }
                 }
-            if (Math.random() > 0.95 && this.bossArr.length < 1 && this.score === 25) {
+            if (Math.random() > 0.95 && this.bossArr.length < 1 && this.score === 10) {
               this.bossArr.push(new Boss(this.gameScreen)); 
           } 
         }
@@ -412,8 +412,8 @@ class Player {
           this.gameScreen = gameScreen;
           this.left = Math.floor(Math.random() * 300 + 70);
           this.top = 0;
-          this.width = 200;
-          this.height = 300;
+          this.width = 150;
+          this.height = 250;
           this.element = document.createElement("img");
       
           this.element.src = "./docs/assets/file.png";
