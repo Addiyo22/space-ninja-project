@@ -112,7 +112,7 @@ class Game {
                 
             // Creating random obstacle
                  
-            if (Math.random() > 0.99 && this.obstacles.length < 1) {
+            if (Math.random() > 0.99 && this.obstacles.length < 2) {
                 this.obstacles.push(new Obstacle(this.gameScreen)); 
             } 
 
@@ -137,7 +137,7 @@ class Game {
 
               // Creating random collectable
 
-              if (Math.random() > 0.99 && this.collectables.length < 4) {
+              if (Math.random() > 0.99 && this.collectables.length < 5) {
                 this.collectables.push(new Collectable(this.gameScreen));  
             }
 
@@ -189,7 +189,7 @@ class Game {
                       boss.element.remove();
                     }
                 }
-            if (Math.random() > 0.95 && this.bossArr.length < 1 && this.score === 20) {
+            if (Math.random() > 0.95 && this.bossArr.length < 1 && this.score === 25) {
               this.bossArr.push(new Boss(this.gameScreen)); 
           } 
         }
@@ -232,13 +232,13 @@ class Player {
         }
     
         // handles right hand side
-        if (this.left > this.gameScreen.offsetWidth - this.width - -10) {
-          this.left = this.gameScreen.offsetWidth - this.width - -10;
+        if (this.left > this.gameScreen.offsetWidth - this.width - 20) {
+          this.left = this.gameScreen.offsetWidth - this.width - 20;
         }
     
         // handles bottom side
-        if (this.top > this.gameScreen.offsetHeight - this.height - -5) {
-          this.top = this.gameScreen.offsetHeight - this.height - -5;
+        if (this.top > this.gameScreen.offsetHeight - this.height - 25) {
+          this.top = this.gameScreen.offsetHeight - this.height - 25;
         }
     
         // Update the player's car position on the screen

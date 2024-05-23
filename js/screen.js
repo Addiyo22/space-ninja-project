@@ -1,6 +1,7 @@
 window.onload = function () {
     const startButton = document.querySelector("#start-button")
     const restartButton = document.querySelector("#restart-button")
+    const menuButton = document.querySelector("#refresh-button")
     let game
 
     function handleKeys(event) {
@@ -37,6 +38,10 @@ window.onload = function () {
         game.start()
       }
 
+      function refresh(){
+        window.location.reload();
+      }
+
     window.addEventListener("keydown", handleKeys)
 
     startButton.addEventListener("click", function () {
@@ -45,5 +50,9 @@ window.onload = function () {
 
     restartButton.addEventListener("click", function () {
         startGame();
+    })
+
+    menuButton.addEventListener("click", function(){
+        refresh();
     })
 }
