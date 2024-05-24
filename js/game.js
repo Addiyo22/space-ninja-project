@@ -182,7 +182,12 @@ class Game {
                   else if (this.player.didCollide(boss)) {
                       boss.element.remove();
                       this.bossArr.splice(i, 1);
-                      this.lives -= 2
+                      if(this.lives === 1){
+                        this.lives--
+                      }
+                      else{
+                        this.lives -= 2
+                      }
                       i--;
                   }
                   else if (boss.top > this.height) {
