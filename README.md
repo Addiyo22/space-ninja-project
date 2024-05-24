@@ -48,7 +48,7 @@ Space Ninja is game where the player starts with 4 lives and dodges shuriken and
   - menuButton.addEventListener()
 
 ## game.js
-1. game()
+### game()
   - this.startScreen;
   - this.gameScreen;
   - this.statContainer;
@@ -79,7 +79,7 @@ Space Ninja is game where the player starts with 4 lives and dodges shuriken and
  - endGame()
  - update()
 
-1. player()
+### player()
   - this.gameScreen
   - this.left;
   - this.top;
@@ -103,7 +103,7 @@ Space Ninja is game where the player starts with 4 lives and dodges shuriken and
  - didCollide(collectable)
  - didCollide(boss)
 
-1. Obstacle()
+### Obstacle()
   - this.gameScreen;
   - this.left;
   - this.top;
@@ -121,7 +121,7 @@ Space Ninja is game where the player starts with 4 lives and dodges shuriken and
  - updatePosition()
  - move()
 
-1. Obstacle2()
+### Obstacle2()
   - this.gameScreen;
   - this.left;
   - this.top;
@@ -139,7 +139,7 @@ Space Ninja is game where the player starts with 4 lives and dodges shuriken and
  - updatePosition()
  - move()
 
-1. Collectable()
+### Collectable()
   - this.gameScreen;
   - this.left;
   - this.top;
@@ -157,7 +157,7 @@ Space Ninja is game where the player starts with 4 lives and dodges shuriken and
  - updatePosition()
  - move()
 
-1. Boss()
+### Boss()
   - this.gameScreen;
   - this.left;
   - this.top;
