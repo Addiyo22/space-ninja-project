@@ -40,12 +40,12 @@ Space Ninja is game where the player starts with 4 lives and dodges shuriken and
 
 # Project Structure
 ## screen.js
-  - handleKeys()
-  - startGame()
-  - refresh()
-  - startButton.addEventListener()
-  - restartButton.addEventListener()
-  - menuButton.addEventListener()
+- handleKeys()
+- startGame()
+- refresh()
+- startButton.addEventListener()
+- restartButton.addEventListener()
+- menuButton.addEventListener()
 
 ## game.js
 ### game()
@@ -70,14 +70,14 @@ Space Ninja is game where the player starts with 4 lives and dodges shuriken and
   - this.gameIntervalId
   - this.gameLoopFrequency
 
- - startAudio()
- - stopAudio()
- - start()
- - gameLoop()
- - updateLives()
- - updateScore()
- - endGame()
- - update()
+- startAudio()
+- stopAudio()
+- start()
+- gameLoop()
+- updateLives()
+- updateScore()
+- endGame()
+- update()
 
 ### player()
   - this.gameScreen
@@ -96,12 +96,12 @@ Space Ninja is game where the player starts with 4 lives and dodges shuriken and
   - this.element.style.top;
   - this.gameScreen.appendChild(this.element)
 
- - move()
- - updatePosition()
- - didCollide(obstacle)
- - didCollide(obstacle2)
- - didCollide(collectable)
- - didCollide(boss)
+- move()
+- updatePosition()
+- didCollide(obstacle)
+- didCollide(obstacle2)
+- didCollide(collectable)
+- didCollide(boss)
 
 ### Obstacle()
   - this.gameScreen;
@@ -118,8 +118,8 @@ Space Ninja is game where the player starts with 4 lives and dodges shuriken and
   - this.element.style.top;
   - this.gameScreen.appendChild(this.element)
  
- - updatePosition()
- - move()
+- updatePosition()
+- move()
 
 ### Obstacle2()
   - this.gameScreen;
@@ -136,8 +136,8 @@ Space Ninja is game where the player starts with 4 lives and dodges shuriken and
   - this.element.style.top;
   - this.gameScreen.appendChild(this.element)
  
- - updatePosition()
- - move()
+- updatePosition()
+- move()
 
 ### Collectable()
   - this.gameScreen;
@@ -154,8 +154,8 @@ Space Ninja is game where the player starts with 4 lives and dodges shuriken and
   - this.element.style.top;
   - this.gameScreen.appendChild(this.element)
  
- - updatePosition()
- - move()
+- updatePosition()
+- move()
 
 ### Boss()
   - this.gameScreen;
@@ -172,8 +172,8 @@ Space Ninja is game where the player starts with 4 lives and dodges shuriken and
   - this.element.style.top;
   - this.gameScreen.appendChild(this.element)
  
- - updatePosition()
- - move()
+- updatePosition()
+- move()
 
 
 ## Links
