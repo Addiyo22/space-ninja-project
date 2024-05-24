@@ -186,7 +186,7 @@ class Game {
                         this.lives--
                       }
                       else{
-                        this.lives -= 2
+                        this.lives -= 2 
                       }
                       i--;
                   }
@@ -211,14 +211,12 @@ class Player {
       this.directionX = 0;
       this.directionY = 0;
       this.element = document.createElement("img");
-  
       this.element.src = imgSrc;
       this.element.style.position = "absolute";
       this.element.style.width = `${width}px`;
       this.element.style.height = `${height}px`;
       this.element.style.left = `${left}px`;
       this.element.style.top = `${top}px`;
-  
       this.gameScreen.appendChild(this.element);
     }
 
